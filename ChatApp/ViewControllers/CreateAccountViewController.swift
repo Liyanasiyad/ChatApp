@@ -16,6 +16,7 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
+    var activeTextField: UITextField?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +30,50 @@ class CreateAccountViewController: UIViewController {
         signinAccountTextView.isScrollEnabled = false
         signinAccountTextView.textAlignment = .center
         signinAccountTextView.isEditable = false
+        usernameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        let backgroundTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(backgroundTap)
+        
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerKeyboardNotifications()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeKeyBoardNotifications()
+    }
+    func registerKeyboardNotifications() {
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIWindow.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+      func removeKeyBoardNotifications() {
+          NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillHideNotification, object: nil)
+      }
     
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         containerView.layer.cornerRadius = 20
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardOffset = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+        let totalOffset = activeTextField == nil ? keyboardOffset : keyboardOffset + activeTextField!.frame.height
+        scrollView.contentInset.bottom = totalOffset
+
+        
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        scrollView.contentInset.bottom = 0
+        
     }
     
     @IBAction func createAccountButtonTapped(_ sender: Any) {
@@ -51,6 +90,13 @@ extension CreateAccountViewController: UITextViewDelegate {
                 return false
             }
         }
-    
-    
+extension CreateAccountViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        activeTextField = nil
+    }
+}
+
 
