@@ -31,6 +31,7 @@ class SignInViewController: UIViewController {
         createAccountTextView.isEditable = false
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        passwordTextField.isSecureTextEntry = true
      
         let backgroundTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(backgroundTap)

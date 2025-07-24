@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 
 class CreateAccountViewController: UIViewController {
     
@@ -33,6 +36,7 @@ class CreateAccountViewController: UIViewController {
         usernameTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        passwordTextField.isSecureTextEntry = true
         let backgroundTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(backgroundTap)
         
@@ -77,8 +81,45 @@ class CreateAccountViewController: UIViewController {
     }
     
     @IBAction func createAccountButtonTapped(_ sender: Any) {
+        guard let username = usernameTextField.text else {
+            presentErrorAlert(title: "userrname Required", message: "Please enter a username to continue")
+            return
+        }
+        guard username.count >= 1 && username.count <= 15 else {
+            presentErrorAlert(title: "userrname Required", message: "Please enter a username between 1 and 15 characters long")
+            return
+        }
+        guard let password = passwordTextField.text else {
+            presentErrorAlert(title: "password Required", message: "Please enter a password to continue")
+            return
+        }
+        guard let email = emailTextField.text else {
+            presentErrorAlert(title: "Email Required", message: "Please enter an email to continue")
+            return
+        }
+        Auth.auth().createUser(withEmail: email, password: password) { result,error in
+            if let error = error {
+                print(error.localizedDescription)
+                self.presentErrorAlert(title: "create Account Failed", message: "something went wrong please try again later")
+                return
+            }
+            guard let result = result else {
+                self.presentErrorAlert(title: "create Account Failed", message: "something went wrong please try again later")
+                return
+            }
+          
+            let userId = result.user.uid
+            let userData: [String:Any] = ["id":userId,"username":username]
+            Database.database().reference().child("users").child(userId).setValue(userData)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeVC = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+            let navVC = UINavigationController(rootViewController: homeVC)
+            let window = UIApplication.shared.connectedScenes.flatMap { ($0 as? UIWindowScene)?.windows ?? [] }.first { $0.isKeyWindow }
+            window?.rootViewController = navVC
+            
+          
+        }
     }
-    
 
 }
 extension CreateAccountViewController: UITextViewDelegate {
