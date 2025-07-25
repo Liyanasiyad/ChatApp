@@ -16,7 +16,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     var activeTextField: UITextField?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         containerView.clipsToBounds = true
@@ -29,14 +29,14 @@ class SignInViewController: UIViewController {
         createAccountTextView.isScrollEnabled = false
         createAccountTextView.textAlignment = .center
         createAccountTextView.isEditable = false
+        createAccountTextView.isSelectable = true
         emailTextField.delegate = self
         passwordTextField.delegate = self
         passwordTextField.isSecureTextEntry = true
-     
         let backgroundTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(backgroundTap)
-        
     }
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

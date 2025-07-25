@@ -12,7 +12,6 @@
 		BA66B2B82E309A0100EF15ED /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BA66B2B72E309A0100EF15ED /* FirebaseDatabase */; };
 		BA66B2BA2E309A0100EF15ED /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BA66B2B92E309A0100EF15ED /* FirebaseMessaging */; };
 		BA66B2BC2E309A0100EF15ED /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BA66B2BB2E309A0100EF15ED /* FirebaseStorage */; };
-		E12D57D72A6B3FD600D556EF /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D57D62A6B3FD600D556EF /* PrimaryButton.swift */; };
 		E12D58062A6CAE8F00D556EF /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D58052A6CAE8F00D556EF /* Extension+UIColor.swift */; };
 		E13089A82A69EDB600C1889D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13089A72A69EDB600C1889D /* AppDelegate.swift */; };
 		E13089AA2A69EDB600C1889D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13089A92A69EDB600C1889D /* SceneDelegate.swift */; };
@@ -29,7 +28,6 @@
 
 /* Begin PBXFileReference section */
 		BA66B2B22E30975B00EF15ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E12D57D62A6B3FD600D556EF /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		E12D58052A6CAE8F00D556EF /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		E13089A42A69EDB600C1889D /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E13089A72A69EDB600C1889D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +45,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		BA17A29F2E322ABE008DA094 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		BA66B2DE2E31045700EF15ED /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -120,9 +119,9 @@
 		E13089CB2A69FFEF00C1889D /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				BA17A29F2E322ABE008DA094 /* Components */,
 				E13089C32A69F24800C1889D /* Font.swift */,
 				E13089C12A69F02200C1889D /* Colors.xcassets */,
-				E12D57D62A6B3FD600D556EF /* PrimaryButton.swift */,
 				E12D58052A6CAE8F00D556EF /* Extension+UIColor.swift */,
 			);
 			path = Design;
@@ -144,6 +143,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				BA17A29F2E322ABE008DA094 /* Components */,
 				BA66B2DE2E31045700EF15ED /* Extensions */,
 			);
 			name = ChatApp;
@@ -212,7 +212,6 @@
 				E13089C42A69F24800C1889D /* Font.swift in Sources */,
 				E13089A82A69EDB600C1889D /* AppDelegate.swift in Sources */,
 				E13089C62A69FBF400C1889D /* SignInViewController.swift in Sources */,
-				E12D57D72A6B3FD600D556EF /* PrimaryButton.swift in Sources */,
 				E13089CA2A69FCD300C1889D /* HomeViewController.swift in Sources */,
 				E13089AA2A69EDB600C1889D /* SceneDelegate.swift in Sources */,
 				E12D58062A6CAE8F00D556EF /* Extension+UIColor.swift in Sources */,

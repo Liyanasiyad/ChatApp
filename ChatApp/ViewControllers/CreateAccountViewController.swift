@@ -19,8 +19,10 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
+ 
+    
     var activeTextField: UITextField?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         containerView.clipsToBounds = true
@@ -51,15 +53,15 @@ class CreateAccountViewController: UIViewController {
         removeKeyBoardNotifications()
     }
     func registerKeyboardNotifications() {
-          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIWindow.keyboardWillShowNotification, object: nil)
-          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-      }
-      func removeKeyBoardNotifications() {
-          NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillShowNotification, object: nil)
-          NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillHideNotification, object: nil)
-      }
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIWindow.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    func removeKeyBoardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillHideNotification, object: nil)
+    }
     
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         containerView.layer.cornerRadius = 20
@@ -72,7 +74,7 @@ class CreateAccountViewController: UIViewController {
         let keyboardOffset = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
         let totalOffset = activeTextField == nil ? keyboardOffset : keyboardOffset + activeTextField!.frame.height
         scrollView.contentInset.bottom = totalOffset
-
+        
         
     }
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -97,47 +99,57 @@ class CreateAccountViewController: UIViewController {
             presentErrorAlert(title: "Email Required", message: "Please enter an email to continue")
             return
         }
-        Auth.auth().createUser(withEmail: email, password: password) { result,error in
-            if let error = error {
-                print(error.localizedDescription)
-                self.presentErrorAlert(title: "create Account Failed", message: "something went wrong please try again later")
+       showLoadingView()
+        Database.database().reference().child("usernames").child(username).observeSingleEvent(of: .value, with: { snapshot in
+            guard !snapshot.exists() else {
+                self.presentErrorAlert(title: "username in use", message: "please try a different username")
+                self .removeLoadingView()
                 return
             }
-            guard let result = result else {
-                self.presentErrorAlert(title: "create Account Failed", message: "something went wrong please try again later")
-                return
-            }
-          
-            let userId = result.user.uid
-            let userData: [String:Any] = ["id":userId,"username":username]
-            Database.database().reference().child("users").child(userId).setValue(userData)
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeVC = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
-            let navVC = UINavigationController(rootViewController: homeVC)
-            let window = UIApplication.shared.connectedScenes.flatMap { ($0 as? UIWindowScene)?.windows ?? [] }.first { $0.isKeyWindow }
-            window?.rootViewController = navVC
             
-          
-        }
-    }
-
-}
-extension CreateAccountViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange,interaction: UITextItemInteraction) -> Bool {
-        
-            if URL.scheme == "chatappcreate" {
-                    performSegue(withIdentifier: "SignInSegue", sender: nil)
+            Auth.auth().createUser(withEmail: email, password: password) { result,error in
+                self.removeLoadingView()
+                if let error = error {
+                    print(error.localizedDescription)
+                    self.presentErrorAlert(title: "create Account Failed", message: "something went wrong please try again later")
+                    return
                 }
-                return false
+                guard let result = result else {
+                    self.presentErrorAlert(title: "create Account Failed", message: "something went wrong please try again later")
+                    return
+                }
+                
+                let userId = result.user.uid
+                let userData: [String:Any] = ["id":userId,"username":username]
+                Database.database().reference().child("users").child(userId).setValue(userData)
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let homeVC = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+                let navVC = UINavigationController(rootViewController: homeVC)
+                let window = UIApplication.shared.connectedScenes.flatMap { ($0 as? UIWindowScene)?.windows ?? [] }.first { $0.isKeyWindow }
+                window?.rootViewController = navVC
             }
-        }
-extension CreateAccountViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = textField
+        })
     }
-    func textViewDidEndEditing(_ textView: UITextView) {
-        activeTextField = nil
+    
+    func createLoading() {
+        let loadingView = LoadingView()
     }
 }
-
+    extension CreateAccountViewController: UITextViewDelegate {
+        func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange,interaction: UITextItemInteraction) -> Bool {
+            
+            if URL.scheme == "chatappcreate" {
+                performSegue(withIdentifier: "SignInSegue", sender: nil)
+            }
+            return false
+        }
+    }
+    extension CreateAccountViewController: UITextFieldDelegate {
+        func textFieldDidBeginEditing(_ textField: UITextField) {
+            activeTextField = textField
+        }
+        func textViewDidEndEditing(_ textView: UITextView) {
+            activeTextField = nil
+        }
+    }
 
