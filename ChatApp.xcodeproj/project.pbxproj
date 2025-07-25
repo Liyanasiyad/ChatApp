@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA3167E32E337C6B00BAA5A1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3167E22E337C6B00BAA5A1 /* ProfileViewController.swift */; };
 		BA66B2B32E30975B00EF15ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA66B2B22E30975B00EF15ED /* GoogleService-Info.plist */; };
 		BA66B2B62E309A0100EF15ED /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BA66B2B52E309A0100EF15ED /* FirebaseAuth */; };
 		BA66B2B82E309A0100EF15ED /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BA66B2B72E309A0100EF15ED /* FirebaseDatabase */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA3167E22E337C6B00BAA5A1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BA66B2B22E30975B00EF15ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E12D58052A6CAE8F00D556EF /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		E13089A42A69EDB600C1889D /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 				E13089C52A69FBF400C1889D /* SignInViewController.swift */,
 				E13089C72A69FC1700C1889D /* CreateAccountViewController.swift */,
 				E13089C92A69FCD300C1889D /* HomeViewController.swift */,
+				BA3167E22E337C6B00BAA5A1 /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				E13089C42A69F24800C1889D /* Font.swift in Sources */,
 				E13089A82A69EDB600C1889D /* AppDelegate.swift in Sources */,
 				E13089C62A69FBF400C1889D /* SignInViewController.swift in Sources */,
+				BA3167E32E337C6B00BAA5A1 /* ProfileViewController.swift in Sources */,
 				E13089CA2A69FCD300C1889D /* HomeViewController.swift in Sources */,
 				E13089AA2A69EDB600C1889D /* SceneDelegate.swift in Sources */,
 				E12D58062A6CAE8F00D556EF /* Extension+UIColor.swift in Sources */,

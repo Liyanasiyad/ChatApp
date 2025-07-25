@@ -58,17 +58,98 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xl7-uZ-YQD">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="I9M-yy-xwm">
+                        <barButtonItem key="leftBarButtonItem" image="person.fill" catalog="system" id="I9M-yy-xwm">
                             <connections>
-                                <action selector="logoutButtonTapped:" destination="zVA-oo-IMP" id="3V7-VF-Fgq"/>
+                                <action selector="ProfileButtonTapped:" destination="zVA-oo-IMP" id="odP-zf-kGs"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="aw1-dI-lXv"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="P9A-Oe-uhW" kind="presentation" identifier="ProfileSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="MVc-eC-S2Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZW-ou-Vi7" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1063.3587786259541" y="3.5211267605633805"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="qW2-lm-Ghm">
+            <objects>
+                <viewController id="P9A-Oe-uhW" customClass="ProfileViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gDu-1J-W4e">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dO1-UW-Xuk">
+                                <rect key="frame" x="25" y="276" width="343" height="300"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Qi-KO-3QR">
+                                        <rect key="frame" x="111.66666666666666" y="25" width="120" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="E9Q-kG-fug"/>
+                                            <constraint firstAttribute="height" constant="120" id="Mb2-NW-7lF"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Y4-eB-KLx">
+                                        <rect key="frame" x="20" y="165" width="303" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ag2-j7-rlg" customClass="PrimaryButton" customModule="ChatApp" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="225" width="303" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="e8f-lc-YEr"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Logout"/>
+                                        <connections>
+                                            <action selector="logoutButtonTapped:" destination="P9A-Oe-uhW" eventType="touchUpInside" id="jya-rd-DFM"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fOe-8H-Fg2">
+                                        <rect key="frame" x="211.66666666666666" y="121.00000000000001" width="30" height="27.666666666666671"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="TPc-Ys-Oxu"/>
+                                            <constraint firstAttribute="height" constant="30" id="etz-7E-N6Z"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="6Qi-KO-3QR" firstAttribute="top" secondItem="dO1-UW-Xuk" secondAttribute="top" constant="25" id="F8m-RO-1Sp"/>
+                                    <constraint firstItem="6Y4-eB-KLx" firstAttribute="leading" secondItem="dO1-UW-Xuk" secondAttribute="leading" constant="20" id="Gbc-Sl-leJ"/>
+                                    <constraint firstItem="6Qi-KO-3QR" firstAttribute="centerX" secondItem="dO1-UW-Xuk" secondAttribute="centerX" id="IXT-P8-Lwa"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ag2-j7-rlg" secondAttribute="bottom" constant="30" id="Mjl-XW-ieB"/>
+                                    <constraint firstAttribute="height" constant="300" id="R4w-2N-Rci"/>
+                                    <constraint firstItem="fOe-8H-Fg2" firstAttribute="leading" secondItem="6Qi-KO-3QR" secondAttribute="trailing" constant="-20" id="Xfb-u7-QzK"/>
+                                    <constraint firstItem="fOe-8H-Fg2" firstAttribute="bottom" secondItem="6Qi-KO-3QR" secondAttribute="bottom" constant="5" id="aRX-ro-XBT"/>
+                                    <constraint firstItem="Ag2-j7-rlg" firstAttribute="leading" secondItem="dO1-UW-Xuk" secondAttribute="leading" constant="20" id="bjy-6T-M6a"/>
+                                    <constraint firstItem="6Y4-eB-KLx" firstAttribute="top" secondItem="6Qi-KO-3QR" secondAttribute="bottom" constant="20" id="ohL-3d-5gr"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ag2-j7-rlg" secondAttribute="trailing" constant="20" id="sBO-dx-aAK"/>
+                                    <constraint firstAttribute="trailing" secondItem="6Y4-eB-KLx" secondAttribute="trailing" constant="20" id="wM6-MS-Vvo"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sdw-2y-ZbG"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.39628507653061223" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dO1-UW-Xuk" firstAttribute="leading" secondItem="sdw-2y-ZbG" secondAttribute="leading" constant="25" id="1AT-Ug-gQ8"/>
+                            <constraint firstItem="dO1-UW-Xuk" firstAttribute="centerY" secondItem="gDu-1J-W4e" secondAttribute="centerY" id="Hk2-Ax-HjR"/>
+                            <constraint firstItem="sdw-2y-ZbG" firstAttribute="trailing" secondItem="dO1-UW-Xuk" secondAttribute="trailing" constant="25" id="MP8-qz-QHI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="avatarImageView" destination="6Qi-KO-3QR" id="uWH-ct-Enq"/>
+                        <outlet property="containerView" destination="dO1-UW-Xuk" id="FiQ-Tc-JUU"/>
+                        <outlet property="usernameLabel" destination="6Y4-eB-KLx" id="zkl-5L-MyZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JM6-Jx-MI6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2020.6106870229007" y="3.5211267605633805"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Ps-Qt-YHo">
@@ -90,7 +171,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera.fill" catalog="system" width="128" height="93"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
