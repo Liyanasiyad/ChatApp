@@ -136,6 +136,11 @@ class CreateAccountViewController: UIViewController {
                 let userId = result.user.uid
                 let userData: [String:Any] = ["id":userId,"username":username]
                 Database.database().reference().child("users").child(userId).setValue(userData)
+                Database.database().reference().child("usernames").child(username).setValue(userData)
+                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = username
+                changeRequest?.commitChanges()
+                
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let homeVC = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
                 let navVC = UINavigationController(rootViewController: homeVC)
